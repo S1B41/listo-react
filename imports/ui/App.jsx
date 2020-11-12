@@ -3,8 +3,9 @@ import Note from './Note';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const App = () => (
-  <div>
+  <div className="app container">
     <Note />
-    <button className="btn btn-outline-success">Hello</button>
+    <Note />
+    <Note />
   </div>
 );
