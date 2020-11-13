@@ -17,7 +17,6 @@ export default class Note extends Component {
           padding: "15px 15px 10px",
           cursor: "pointer",
           whiteSpace: "pre-wrap",
-          overflow: "hidden",
           marginLeft: 10,
           marginRight: 10,
           height: "max-content",
@@ -27,7 +26,12 @@ export default class Note extends Component {
         className="note col-md-3 my-3"
       >
         {/* <div> */}
-        <LinesEllipsis text={value} maxLine="3" ellipsis=" ..." />
+        <LinesEllipsis
+          style={{ overflow: "hidden" }}
+          text={value}
+          maxLine="3"
+          ellipsis=" ..."
+        />
         {/* </div> */}
         {/* <div><button onClick={() => this.props.onRemove()}>Remove</button></div> */}
         <div
