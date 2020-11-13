@@ -9,7 +9,14 @@ import NoteText from "./noteText";
 
 export default class Note extends Component {
   render() {
-    const { value, createdAt, modifiedAt, onEdit, onRemove } = this.props;
+    const {
+      title,
+      value,
+      createdAt,
+      modifiedAt,
+      onEdit,
+      onRemove,
+    } = this.props;
     return (
       <div
         onClick={onEdit}
@@ -25,6 +32,9 @@ export default class Note extends Component {
         // className="note offset-md-3 col-md-6 my-3"
         className="note col-md-3 my-3"
       >
+        <div>
+          <strong>{title}</strong>
+        </div>
         {/* <div> */}
         <LinesEllipsis
           style={{ overflow: "hidden" }}

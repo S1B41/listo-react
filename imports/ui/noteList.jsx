@@ -11,24 +11,26 @@ import Note from "./note";
 class notelist extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { update: {} };
   }
 
   onSave() {
-    if (!this.state.value) {
+    if (!Object.keys(this.state.update).length) {
       this.setState({ editModal: false });
       return;
     }
 
-    const notes = this.props.notes;
-    const index = notes.findIndex((n) => n._id === this.state.currentNote);
+    const _id = this.props.notes.find(n => n._id === this.state.currentNote)
+      ._id;
+    const $set = { ...this.state.update, modifiedAt: new Date() };
 
-    notes[index].value = this.state.value;
-    Notes.update(
-      { _id: notes[index]._id },
-      { $set: { value: this.state.value, modifiedAt: new Date() } }
-    );
-    this.setState({ editModal: false, value: "" });
+    Notes.update({ _id }, { $set });
+
+    this.cleanupState();
+  }
+
+  onUpdate(update) {
+    this.setState({ ...update, update: { ...this.state.update, ...update } });
   }
 
   onRemove(e, _id) {
@@ -37,12 +39,26 @@ class notelist extends Component {
   }
 
   onClose() {
-    if (!this.state.value) {
+    if (!Object.keys(this.state.update).length) {
       this.setState({ currentNote: null, editModal: false });
     } else {
-      confirm("Discard changes?") &&
-        this.setState({ currentNote: null, editModal: false });
+      confirm("Discard changes?") && this.cleanupState();
     }
+  }
+
+  cleanupState(state) {
+    const safeState = state || {};
+    const update = this.state.update;
+
+    Object.keys(update).forEach(k => (update[k] = ""));
+
+    this.setState({
+      ...update,
+      ...safeState,
+      update: {},
+      currentNote: null,
+      editModal: false,
+    });
   }
 
   modal() {
@@ -72,11 +88,19 @@ class notelist extends Component {
         style={customStyles}
         contentLabel="Example Modal"
       >
+        <input
+          className="form-control"
+          onChange={e => this.onUpdate({ title: e.target.value })}
+          value={
+            this.state.title ||
+            this.props.notes.find(n => n._id === this.state.currentNote).title
+          }
+        />
         <TextareaAutosize
-          onChange={(e) => this.setState({ value: e.target.value })}
+          onChange={e => this.onUpdate({ value: e.target.value })}
           value={
             this.state.value ||
-            this.props.notes.find((n) => n._id === this.state.currentNote).value
+            this.props.notes.find(n => n._id === this.state.currentNote).value
           }
           className="form-control"
         />
@@ -99,21 +123,19 @@ class notelist extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
-      // <div style={{ margin: '0' }}>
-      // <div className="row d-flex flex-column justify-content-center">
       <div className="row justify-content-center">
-        {(this.props.notes || []).map((note) => (
+        {(this.props.notes || []).map(note => (
           <Note
             key={note._id}
+            title={note.title}
             value={note.value}
             createdAt={note.createdAt}
             modifiedAt={note.modifiedAt}
             onEdit={() =>
               this.setState({ currentNote: note._id, editModal: true })
             }
-            onRemove={(e) => this.onRemove(e, note._id)}
+            onRemove={e => this.onRemove(e, note._id)}
           />
         ))}
         {this.modal()}
