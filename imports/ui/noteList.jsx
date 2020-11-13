@@ -16,6 +16,7 @@ class notelist extends Component {
 
   onEdit() {
     if (!this.state.value) {
+      this.setState({ editModal: false });
       return;
     }
 
@@ -35,6 +36,15 @@ class notelist extends Component {
     confirm("remove note?") && Notes.remove({ _id });
   }
 
+  onClose() {
+    if (!this.state.value) {
+      this.setState({ currentNote: null, editModal: false });
+    } else {
+      confirm("Discard changes?") &&
+        this.setState({ currentNote: null, editModal: false });
+    }
+  }
+
   modal() {
     if (!this.state.editModal) {
       return null;
@@ -44,7 +54,7 @@ class notelist extends Component {
 
     const customStyles = {
       content: {
-        width: "40%",
+        width: "50%",
         top: "50%",
         left: "50%",
         right: "auto",
@@ -70,12 +80,20 @@ class notelist extends Component {
           }
           className="form-control"
         />
-        <button onClick={() => this.onEdit()}>save</button>
-        <button
-          onClick={() => this.setState({ currentNote: null, editModal: false })}
-        >
-          close
-        </button>
+        <div style={{ marginTop: 10 }}>
+          <button
+            className="btn btn-success btn-sm"
+            onClick={() => this.onEdit()}
+          >
+            save
+          </button>
+          <button
+            className="btn btn-dark btn-sm ml-1"
+            onClick={() => this.onClose()}
+          >
+            close
+          </button>
+        </div>
       </Modal>
     );
   }
