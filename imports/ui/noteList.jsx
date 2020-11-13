@@ -88,22 +88,28 @@ class notelist extends Component {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <input
-          className="form-control"
-          onChange={e => this.onUpdate({ title: e.target.value })}
-          value={
-            this.state.title ||
-            this.props.notes.find(n => n._id === this.state.currentNote).title
-          }
-        />
-        <TextareaAutosize
-          onChange={e => this.onUpdate({ value: e.target.value })}
-          value={
-            this.state.value ||
-            this.props.notes.find(n => n._id === this.state.currentNote).value
-          }
-          className="form-control"
-        />
+        <div>
+          <label>Title</label>
+          <input
+            className="form-control"
+            onChange={e => this.onUpdate({ title: e.target.value })}
+            value={
+              this.state.title ||
+              this.props.notes.find(n => n._id === this.state.currentNote).title
+            }
+          />
+        </div>
+        <div style={{ marginTop: 20 }}>
+          <label>Note</label>
+          <TextareaAutosize
+            onChange={e => this.onUpdate({ value: e.target.value })}
+            value={
+              this.state.value ||
+              this.props.notes.find(n => n._id === this.state.currentNote).value
+            }
+            className="form-control"
+          />
+        </div>
         <div style={{ marginTop: 10 }}>
           <button
             className="btn btn-success btn-sm"
