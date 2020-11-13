@@ -9,11 +9,12 @@ import NoteText from "./noteText";
 
 export default class Note extends Component {
   render() {
-    const { value, createdAt, onEdit, onRemove } = this.props;
+    const { value, createdAt, modifiedAt, onEdit, onRemove } = this.props;
     return (
       <div
         onClick={onEdit}
         style={{
+          padding: "15px 15px 10px",
           cursor: "pointer",
           whiteSpace: "pre-wrap",
           overflow: "hidden",
@@ -25,9 +26,19 @@ export default class Note extends Component {
         <LinesEllipsis text={value} maxLine="3" ellipsis=" ..." />
         {/* </div> */}
         {/* <div><button onClick={() => this.props.onRemove()}>Remove</button></div> */}
-        <div>
+        <div
+          style={{
+            marginTop: 10,
+            color: "#ccc",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <small style={{ fontSize: "xx-small" }}>
             created on {createdAt.toLocaleString("de")}
+          </small>
+          <small style={{ fontSize: "xx-small" }}>
+            modified on {(modifiedAt || createdAt).toLocaleString("de")}
           </small>
         </div>
         <div>

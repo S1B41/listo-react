@@ -25,7 +25,7 @@ class notelist extends Component {
     notes[index].value = this.state.value;
     Notes.update(
       { _id: notes[index]._id },
-      { $set: { value: this.state.value, modified: new Date() } }
+      { $set: { value: this.state.value, modifiedAt: new Date() } }
     );
     this.setState({ editModal: false, value: "" });
   }
@@ -91,6 +91,7 @@ class notelist extends Component {
             key={note._id}
             value={note.value}
             createdAt={note.createdAt}
+            modifiedAt={note.modifiedAt}
             onEdit={() =>
               this.setState({ currentNote: note._id, editModal: true })
             }
