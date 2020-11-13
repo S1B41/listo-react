@@ -14,7 +14,7 @@ class notelist extends Component {
     this.state = {};
   }
 
-  onEdit() {
+  onSave() {
     if (!this.state.value) {
       this.setState({ editModal: false });
       return;
@@ -83,7 +83,7 @@ class notelist extends Component {
         <div style={{ marginTop: 10 }}>
           <button
             className="btn btn-success btn-sm"
-            onClick={() => this.onEdit()}
+            onClick={() => this.onSave()}
           >
             save
           </button>
