@@ -103,7 +103,7 @@ class notelist extends Component {
     return (
       // <div style={{ margin: '0' }}>
       // <div className="row d-flex flex-column justify-content-center">
-      <div className="row">
+      <div className="row justify-content-center">
         {(this.props.notes || []).map((note) => (
           <Note
             key={note._id}

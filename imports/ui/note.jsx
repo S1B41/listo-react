@@ -18,9 +18,13 @@ export default class Note extends Component {
           cursor: "pointer",
           whiteSpace: "pre-wrap",
           overflow: "hidden",
+          marginLeft: 10,
+          marginRight: 10,
+          height: "max-content",
           // lineBreak: "anywhere",
         }}
-        className="note offset-md-3 col-md-6 my-3"
+        // className="note offset-md-3 col-md-6 my-3"
+        className="note col-md-3 my-3"
       >
         {/* <div> */}
         <LinesEllipsis text={value} maxLine="3" ellipsis=" ..." />
@@ -53,7 +57,6 @@ export default class Note extends Component {
           {/* <button onClick={onRemove} className="btn btn-outline-danger btn-sm">
           </button> */}
         </div>
-        {/* <NoteActions /> */}
       </div>
     );
   }
