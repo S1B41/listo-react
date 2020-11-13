@@ -99,7 +99,7 @@ class notelist extends Component {
             }
           />
         </div>
-        <div style={{ marginTop: 20 }}>
+        <div style={{ marginBottom: 20, marginTop: 20 }}>
           <label>Note</label>
           <TextareaAutosize
             onChange={e => this.onUpdate({ value: e.target.value })}
