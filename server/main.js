@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { LinksCollection } from '/imports/api/links';
+import { LinksCollection } from '/imports/collections/links';
+import Notes from '/imports/collections/notes';
 
 function insertLink({ title, url }) {
   LinksCollection.insert({ title, url, createdAt: new Date() });
@@ -12,20 +13,8 @@ Meteor.startup(() => {
       title: 'Do the Tutorial',
       url: 'https://www.meteor.com/tutorials/react/creating-an-app'
     });
-
-    insertLink({
-      title: 'Follow the Guide',
-      url: 'http://guide.meteor.com'
-    });
-
-    insertLink({
-      title: 'Read the Docs',
-      url: 'https://docs.meteor.com'
-    });
-
-    insertLink({
-      title: 'Discussions',
-      url: 'https://forums.meteor.com'
-    });
+  }
+  if (Notes.find().count() === 0) {
+    Notes.insert({ name: 'test', createdAt: new Date() });
   }
 });
