@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import TextareaAutosize from "react-autosize-textarea";
-import { Button } from "reactstrap";
 
 import Notes from "/imports/collections/notes";
 import { ThemeContext } from "./themeContext";
