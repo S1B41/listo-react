@@ -30,8 +30,12 @@ class notelist extends Component {
     this.cleanupState();
   }
 
-  onUpdate(update) {
-    this.setState({ ...update, update: { ...this.state.update, ...update } });
+  onUpdate(update, callback) {
+    const safeCallback = callback || null;
+    this.setState(
+      { ...update, update: { ...this.state.update, ...update } },
+      safeCallback
+    );
   }
 
   onRemove(e, _id) {
@@ -148,12 +152,18 @@ class notelist extends Component {
             key={note._id}
             title={note.title}
             value={note.value}
+            noteColor={note.color}
             createdAt={note.createdAt}
             modifiedAt={note.modifiedAt}
             onEdit={() =>
               this.setState({ currentNote: note._id, editModal: true })
             }
             onRemove={e => this.onRemove(e, note._id)}
+            onChangeColor={color =>
+              this.setState({ currentNote: note._id }, () =>
+                this.onUpdate({ color }, this.onSave)
+              )
+            }
           />
         ))}
         {this.modal()}

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import LinesEllipsis from "react-lines-ellipsis";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPalette } from "@fortawesome/free-solid-svg-icons";
+import { GithubPicker } from "react-color";
 
 import NoteActions from "./noteActions";
 import NoteInfo from "./noteInfo";
@@ -9,6 +11,11 @@ import NoteText from "./noteText";
 import { ThemeContext } from "./themeContext";
 
 export default class Note extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     const {
       color,
@@ -20,11 +27,14 @@ export default class Note extends Component {
     const {
       title,
       value,
+      noteColor,
       createdAt,
       modifiedAt,
       onEdit,
       onRemove,
+      onChangeColor,
     } = this.props;
+
     return (
       <div
         onClick={onEdit}
@@ -36,7 +46,7 @@ export default class Note extends Component {
           marginRight: 10,
           marginBottom: 20,
           height: "max-content",
-          background,
+          background: noteColor || background,
           color,
           borderRadius: 5,
           boxShadow,
@@ -78,11 +88,51 @@ export default class Note extends Component {
             icon={faTrash}
             size="xs"
             color={subColor}
+            title="Remove"
+          />
+          <FontAwesomeIcon
+            style={{ marginLeft: 10 }}
+            onClick={e => {
+              e.stopPropagation();
+              this.setState({ showColorPicker: true });
+            }}
+            icon={faPalette}
+            size="xs"
+            color={subColor}
+            title="Color"
           />
           {/* </button> */}
           {/* <button onClick={onRemove} className="btn btn-outline-danger btn-sm">
           </button> */}
         </div>
+        {this.state.showColorPicker && (
+          <div
+            style={{
+              position: "absolute",
+              zIndex: "2",
+            }}
+          >
+            <div
+              style={{
+                position: "fixed",
+                top: "0px",
+                right: "0px",
+                bottom: "0px",
+                left: "0px",
+              }}
+              onClick={e => {
+                e.stopPropagation();
+                this.setState({ showColorPicker: false });
+              }}
+            />
+            <GithubPicker
+              onChange={(color, e) => {
+                e.stopPropagation();
+                onChangeColor(color.hex);
+              }}
+            />
+          </div>
+        )}
       </div>
     );
   }
