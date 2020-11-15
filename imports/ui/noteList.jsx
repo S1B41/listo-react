@@ -142,7 +142,7 @@ class notelist extends Component {
 
   render() {
     return (
-      <div className="row justify-content-center">
+      <div className="row">
         {(this.props.notes || []).map(note => (
           <Note
             key={note._id}

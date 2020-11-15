@@ -36,8 +36,7 @@ export default class Note extends Component {
           boxShadow,
           borderBottom,
         }}
-        // className="note offset-md-3 col-md-6 my-3"
-        className="note col-md-3 my-3"
+        className="offset-sm-2 col-sm-12 col-md-3 my-3"
       >
         <div title={title} style={{ overflow: "hidden" }}>
           <strong>{title}</strong>

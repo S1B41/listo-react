@@ -35,9 +35,14 @@ export class App extends Component {
           }}
         >
           <Navbar />
-          <div style={{ paddingTop: 50 }} className="app container">
-            <InputBox />
-            <NoteList />
+          <div className="container">
+            <div className="row">
+              <div className="d-none d-sm-none d-md-block col-md-2"></div>
+              <div style={{ paddingTop: 50 }} className="col-md-10">
+                <InputBox />
+                <NoteList />
+              </div>
+            </div>
           </div>
         </div>
       </ThemeContext.Provider>
