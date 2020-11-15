@@ -32,6 +32,7 @@ export default () => {
               className={`${style.buttonClass} btn-sm`}
               onClick={() => toggleTheme()}
               style={{ outline: "none", boxShadow: "none" }}
+              title="Dark Mode"
             >
               <FontAwesomeIcon icon={faMoon} size="sm" />
             </button>
