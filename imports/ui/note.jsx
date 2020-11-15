@@ -8,7 +8,7 @@ import { GithubPicker } from "react-color";
 import NoteActions from "./noteActions";
 import NoteInfo from "./noteInfo";
 import NoteText from "./noteText";
-import { ThemeContext } from "./themeContext";
+import { ThemeContext, paletteColors } from "./themeContext";
 
 export default class Note extends Component {
   constructor(props) {
@@ -130,6 +130,7 @@ export default class Note extends Component {
                 e.stopPropagation();
                 onChangeColor(color.hex);
               }}
+              colors={paletteColors}
             />
           </div>
         )}
