@@ -5,9 +5,6 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPalette } from "@fortawesome/free-solid-svg-icons";
 import { GithubPicker } from "react-color";
 
-import NoteActions from "./noteActions";
-import NoteInfo from "./noteInfo";
-import NoteText from "./noteText";
 import { ThemeContext, paletteColors } from "./themeContext";
 
 export default class Note extends Component {
@@ -86,7 +83,7 @@ export default class Note extends Component {
           <FontAwesomeIcon
             onClick={onRemove}
             icon={faTrash}
-            size="xs"
+            size="sm"
             color={subColor}
             title="Remove"
           />
@@ -97,7 +94,7 @@ export default class Note extends Component {
               this.setState({ showColorPicker: true });
             }}
             icon={faPalette}
-            size="xs"
+            size="sm"
             color={subColor}
             title="Color"
           />
