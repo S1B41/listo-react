@@ -16,7 +16,7 @@ export const themes = {
     subColor: "#777",
     background: "#222222",
     boxShadow: "1px 2px 10px #1a1a1a",
-    borderBottom: "3px solid #1a1a1a",
+    borderBottom: "3px solid #111",
     navbarBackground: "#222222",
     navbarBorder: "3px solid #1a1a1a",
     buttonClass: "btn btn-outline-light",
