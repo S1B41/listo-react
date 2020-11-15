@@ -76,7 +76,7 @@ class notelist extends Component {
     const { color, background, buttonClass } = this.context.style;
     const customStyles = {
       content: {
-        width: "50%",
+        width: window.innerWidth > 768 ? "60%" : "90%",
         top: "50%",
         left: "50%",
         right: "auto",
