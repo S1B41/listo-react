@@ -10,7 +10,13 @@ import { ThemeContext } from "./themeContext";
 
 export default class Note extends Component {
   render() {
-    const { color, background, borderBottom, boxShadow } = this.context.style;
+    const {
+      color,
+      subColor,
+      background,
+      borderBottom,
+      boxShadow,
+    } = this.context.style;
     const {
       title,
       value,
@@ -53,7 +59,7 @@ export default class Note extends Component {
         <div
           style={{
             marginTop: 10,
-            color: "#ccc",
+            color: subColor,
             display: "flex",
             justifyContent: "space-between",
           }}
@@ -71,7 +77,7 @@ export default class Note extends Component {
             onClick={onRemove}
             icon={faTrash}
             size="xs"
-            color="#ccc"
+            color={subColor}
           />
           {/* </button> */}
           {/* <button onClick={onRemove} className="btn btn-outline-danger btn-sm">

@@ -3,6 +3,7 @@ import React from "react";
 export const themes = {
   light: {
     color: "#1a1a1a",
+    subColor: "#aaa",
     background: "#ffffff",
     boxShadow: "1px 2px 10px #ccc",
     borderBottom: "3px solid #ccc",
@@ -12,6 +13,7 @@ export const themes = {
   },
   dark: {
     color: "#ffffff",
+    subColor: "#777",
     background: "#222222",
     boxShadow: "1px 2px 10px #1a1a1a",
     borderBottom: "3px solid #1a1a1a",
