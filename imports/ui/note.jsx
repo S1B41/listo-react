@@ -6,9 +6,11 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import NoteActions from "./noteActions";
 import NoteInfo from "./noteInfo";
 import NoteText from "./noteText";
+import { ThemeContext } from "./themeContext";
 
 export default class Note extends Component {
   render() {
+    const { color, background, borderBottom, boxShadow } = this.context.style;
     const {
       title,
       value,
@@ -26,8 +28,13 @@ export default class Note extends Component {
           whiteSpace: "pre-wrap",
           marginLeft: 10,
           marginRight: 10,
+          marginBottom: 20,
           height: "max-content",
-          // lineBreak: "anywhere",
+          background,
+          color,
+          borderRadius: 5,
+          boxShadow,
+          borderBottom,
         }}
         // className="note offset-md-3 col-md-6 my-3"
         className="note col-md-3 my-3"
@@ -75,3 +82,5 @@ export default class Note extends Component {
     );
   }
 }
+
+Note.contextType = ThemeContext;

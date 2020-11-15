@@ -1,26 +1,43 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
+
+import { ThemeContext } from "./themeContext";
 
 export default () => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        backgroundColor: "#4995C7",
-        height: 50,
-        color: "#fff",
-        fontWeight: 700,
-        fontSize: "26px",
-        padding: "0 30px",
-      }}
-    >
-      <div>
-        <img src="/listo-logo.png" width="40" />
-        <span style={{ marginLeft: 10 }}>Listo</span>
-      </div>
-      <div>User</div>
-    </div>
+    <ThemeContext.Consumer>
+      {({ style, toggleTheme }) => (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            backgroundColor: style.navbarBackground,
+            borderBottom: style.navbarBorder,
+            height: 55,
+            color: "#fff",
+            fontWeight: 700,
+            fontSize: "26px",
+            padding: "0 30px",
+          }}
+        >
+          <div>
+            <img src="/listo-logo.png" width="40" />
+            <span style={{ marginLeft: 10 }}>Listo</span>
+          </div>
+          <div>
+            <button
+              className={`${style.buttonClass} btn-sm`}
+              onClick={() => toggleTheme()}
+              style={{ outline: "none", boxShadow: "none" }}
+            >
+              <FontAwesomeIcon icon={faMoon} size="sm" />
+            </button>
+          </div>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   );
 };

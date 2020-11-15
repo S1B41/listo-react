@@ -3,11 +3,11 @@ import TextareaAutosize from "react-autosize-textarea";
 import { Button } from "reactstrap";
 
 import Notes from "/imports/collections/notes";
+import { ThemeContext } from "./themeContext";
 
-// export default (props) => {
 export default class InputBox extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 
@@ -20,19 +20,27 @@ export default class InputBox extends Component {
   }
 
   render() {
+    const { color, background, buttonClass } = this.context.style;
     return (
-      // <div className="row">
       <div className="form-group row">
         <div className="offset-md-2 col-md-7">
           <TextareaAutosize
             value={this.state.value || ""}
-            onChange={(e) => this.setState({ value: e.target.value })}
+            onChange={e => this.setState({ value: e.target.value })}
             placeholder="write something"
             className="form-control"
+            style={{
+              color,
+              background,
+            }}
           />
         </div>
         <div className="col-md-1">
-          <button onClick={() => this.insertNote()} className="btn btn-success">
+          <button
+            onClick={() => this.insertNote()}
+            className={buttonClass}
+            style={{ outline: "none", boxShadow: "none" }}
+          >
             Add
           </button>
         </div>
@@ -40,3 +48,5 @@ export default class InputBox extends Component {
     );
   }
 }
+
+InputBox.contextType = ThemeContext;

@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import TextareaAutosize from "react-autosize-textarea";
 
 import Notes from "/imports/collections/notes";
+import { ThemeContext } from "./themeContext";
 
 import Note from "./note";
 
@@ -68,6 +69,7 @@ class notelist extends Component {
 
     Modal.setAppElement("#react-target");
 
+    const { color, background, buttonClass } = this.context.style;
     const customStyles = {
       content: {
         width: "50%",
@@ -77,6 +79,8 @@ class notelist extends Component {
         bottom: "auto",
         marginRight: "-50%",
         transform: "translate(-50%, -50%)",
+        background,
+        color,
       },
     };
 
@@ -97,6 +101,10 @@ class notelist extends Component {
               this.state.title ||
               this.props.notes.find(n => n._id === this.state.currentNote).title
             }
+            style={{
+              color,
+              background,
+            }}
           />
         </div>
         <div style={{ marginBottom: 20, marginTop: 20 }}>
@@ -108,20 +116,24 @@ class notelist extends Component {
               this.props.notes.find(n => n._id === this.state.currentNote).value
             }
             className="form-control"
+            style={{
+              color,
+              background,
+            }}
           />
         </div>
         <div style={{ marginTop: 10 }}>
           <button
-            className="btn btn-success btn-sm"
+            className="btn btn-outline-success btn-sm"
             onClick={() => this.onSave()}
           >
-            save
+            Save
           </button>
           <button
-            className="btn btn-dark btn-sm ml-1"
+            className={`${buttonClass} btn-sm ml-1`}
             onClick={() => this.onClose()}
           >
-            close
+            Close
           </button>
         </div>
       </Modal>
@@ -161,3 +173,5 @@ const NoteList = withTracker(({}) => {
 })(notelist);
 
 export default NoteList;
+
+notelist.contextType = ThemeContext;
