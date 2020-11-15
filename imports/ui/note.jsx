@@ -44,12 +44,12 @@ export default class Note extends Component {
         }}
         className="offset-sm-2 col-sm-12 col-md-3 my-3"
       >
-        <div title={title} style={{ overflow: "hidden" }}>
+        <div title={title} style={{ fontSize: 18, overflow: "hidden" }}>
           <strong>{title}</strong>
         </div>
         {/* <div> */}
         <LinesEllipsis
-          style={{ overflow: "hidden" }}
+          style={{ fontSize: 16, overflow: "hidden" }}
           text={value}
           maxLine="3"
           ellipsis=" ..."
