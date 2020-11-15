@@ -122,7 +122,7 @@ class notelist extends Component {
             }}
           />
         </div>
-        <div style={{ marginTop: 10 }}>
+        <div style={{ textAlign: "center", marginTop: 10 }}>
           <button
             className="btn btn-outline-success btn-sm"
             onClick={() => this.onSave()}
