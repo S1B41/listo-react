@@ -37,6 +37,7 @@ export default class Note extends Component {
           padding: "15px 15px 10px",
           whiteSpace: "pre-wrap",
           marginLeft: 10,
+          cursor: "grab",
           marginRight: 10,
           marginBottom: 20,
           height: "max-content",
