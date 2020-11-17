@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import LinesEllipsis from "react-lines-ellipsis";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPalette } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPalette, faPen } from "@fortawesome/free-solid-svg-icons";
 import { GithubPicker } from "react-color";
 
 import { ThemeContext, paletteColors } from "./themeContext";
@@ -34,10 +33,8 @@ export default class Note extends Component {
 
     return (
       <div
-        // onClick={onEdit}
         style={{
           padding: "15px 15px 10px",
-          cursor: "pointer",
           whiteSpace: "pre-wrap",
           marginLeft: 10,
           marginRight: 10,
@@ -81,6 +78,15 @@ export default class Note extends Component {
         <div>
           {/* <button className="btn"> */}
           <FontAwesomeIcon
+            style={{ cursor: "pointer" }}
+            onClick={onEdit}
+            icon={faPen}
+            size="sm"
+            color={subColor}
+            title="Remove"
+          />
+          <FontAwesomeIcon
+            style={{ marginLeft: 12, cursor: "pointer" }}
             onClick={onRemove}
             icon={faTrash}
             size="sm"
@@ -88,7 +94,7 @@ export default class Note extends Component {
             title="Remove"
           />
           <FontAwesomeIcon
-            style={{ marginLeft: 10 }}
+            style={{ marginLeft: 12, cursor: "pointer" }}
             onClick={e => {
               e.stopPropagation();
               this.setState({ showColorPicker: true });
