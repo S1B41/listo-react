@@ -163,7 +163,7 @@ class notelist extends Component {
         width = 540;
         break;
       case innerWidth > 0:
-        width = innerWidth - 20;
+        width = innerWidth - 10;
         break;
     }
 
