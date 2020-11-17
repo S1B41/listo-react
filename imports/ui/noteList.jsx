@@ -200,6 +200,10 @@ class notelist extends Component {
                     h: 1,
                     isResizable: false,
                   }}
+                  style={{
+                    left: "20%",
+                    transform: "translate(-50%, 0)",
+                  }}
                 >
                   <Note
                     key={note._id}
