@@ -11,8 +11,6 @@ import { ThemeContext } from "./themeContext";
 
 import Note from "./note";
 
-const WIDTH = window.innerWidth * 0.55;
-
 class notelist extends Component {
   constructor() {
     super();
@@ -148,16 +146,40 @@ class notelist extends Component {
     );
   }
 
+  getWidth() {
+    let innerWidth = window.innerWidth;
+    let width = 1140;
+
+    switch (true) {
+      case innerWidth > 1200:
+        break;
+      case innerWidth > 992:
+        width = 960;
+        break;
+      case innerWidth > 768:
+        width = 720;
+        break;
+      case innerWidth > 576:
+        width = 540;
+        break;
+      case innerWidth > 0:
+        width = innerWidth - 20;
+        break;
+    }
+
+    return width;
+  }
+
   render() {
     return (
       // <div className="row">
       <>
         {/* <div className="col-12 col-sm-12 col-md-12"> */}
-        <div>
+        <div className="row">
           {/* <GridLayout */}
           <ResponsiveGridLayout
             className="layout"
-            width={WIDTH}
+            width={this.getWidth()}
             // breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
             // cols={{ lg: 12, md: 12, sm: 12, xs: 4, xxs: 2 }}
             breakpoints={{ md: 768, sm: 480 }}
@@ -199,10 +221,6 @@ class notelist extends Component {
                     w: 4,
                     h: 1,
                     isResizable: false,
-                  }}
-                  style={{
-                    left: "20%",
-                    transform: "translate(-50%, 0)",
                   }}
                 >
                   <Note
