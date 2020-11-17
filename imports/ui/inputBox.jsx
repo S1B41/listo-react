@@ -22,7 +22,7 @@ export default class InputBox extends Component {
     const { color, background, buttonClass } = this.context.style;
     return (
       <div className="form-group row">
-        <div className="col-9 col-sm-10 offset-md-1 col-md-7">
+        <div className="col-9 col-sm-10 offset-md-3 col-md-7">
           <TextareaAutosize
             value={this.state.value || ""}
             onChange={e => this.setState({ value: e.target.value })}

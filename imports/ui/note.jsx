@@ -34,7 +34,7 @@ export default class Note extends Component {
 
     return (
       <div
-        onClick={onEdit}
+        // onClick={onEdit}
         style={{
           padding: "15px 15px 10px",
           cursor: "pointer",
@@ -49,7 +49,7 @@ export default class Note extends Component {
           boxShadow,
           borderBottom,
         }}
-        className="offset-sm-2 col-sm-12 col-md-3 my-3"
+        // className="offset-sm-2 col-sm-12 col-md-3 my-3"
       >
         <div title={title} style={{ fontSize: 18, overflow: "hidden" }}>
           <strong>{title}</strong>

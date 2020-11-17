@@ -3,11 +3,15 @@ import { withTracker } from "meteor/react-meteor-data";
 import React, { Component } from "react";
 import Modal from "react-modal";
 import TextareaAutosize from "react-autosize-textarea";
+import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
+import GridLayout from "react-grid-layout";
 
 import Notes from "/imports/collections/notes";
 import { ThemeContext } from "./themeContext";
 
 import Note from "./note";
+
+const WIDTH = window.innerWidth * 0.55;
 
 class notelist extends Component {
   constructor() {
@@ -146,28 +150,82 @@ class notelist extends Component {
 
   render() {
     return (
-      <div className="row">
-        {(this.props.notes || []).map(note => (
-          <Note
-            key={note._id}
-            title={note.title}
-            value={note.value}
-            noteColor={note.color}
-            createdAt={note.createdAt}
-            modifiedAt={note.modifiedAt}
-            onEdit={() =>
-              this.setState({ currentNote: note._id, editModal: true })
-            }
-            onRemove={e => this.onRemove(e, note._id)}
-            onChangeColor={color =>
-              this.setState({ currentNote: note._id }, () =>
-                this.onUpdate({ color }, this.onSave)
-              )
-            }
-          />
-        ))}
-        {this.modal()}
-      </div>
+      // <div className="row">
+      <>
+        {/* <div className="col-12 col-sm-12 col-md-12"> */}
+        <div>
+          {/* <GridLayout */}
+          <ResponsiveGridLayout
+            className="layout"
+            width={WIDTH}
+            // breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            // cols={{ lg: 12, md: 12, sm: 12, xs: 4, xxs: 2 }}
+            breakpoints={{ md: 768, sm: 480 }}
+            cols={{ md: 12, sm: 4 }}
+          >
+            {/* {(this.props.notes || []).map((note, index) => ( */}
+            {(this.props.notes || []).map((note, index) => {
+              console.log({
+                x: index * 4 * (index % 3),
+                y: Math.floor(index / 3),
+              });
+              let x;
+              switch (index) {
+                case 0:
+                  x = 0;
+                  break;
+                case 1:
+                  x = 4;
+                  break;
+                case 2:
+                  x = 7;
+                  break;
+                case 3:
+                  x = 0;
+                  break;
+                case 4:
+                  x = 4;
+                  break;
+              }
+              console.log(x);
+              return (
+                <div
+                  key={note._id}
+                  data-grid={{
+                    // x: index * (index % 3),
+                    // x,
+                    x: index % 3 === 0 ? 0 : index % 3 === 1 ? 4 : 8,
+                    y: Math.floor(index / 3),
+                    w: 4,
+                    h: 1,
+                    isResizable: false,
+                  }}
+                >
+                  <Note
+                    key={note._id}
+                    title={note.title}
+                    value={note.value}
+                    noteColor={note.color}
+                    createdAt={note.createdAt}
+                    modifiedAt={note.modifiedAt}
+                    onEdit={() =>
+                      this.setState({ currentNote: note._id, editModal: true })
+                    }
+                    onRemove={e => this.onRemove(e, note._id)}
+                    onChangeColor={color =>
+                      this.setState({ currentNote: note._id }, () =>
+                        this.onUpdate({ color }, this.onSave)
+                      )
+                    }
+                  />
+                </div>
+              );
+            })}
+          </ResponsiveGridLayout>
+          {/* </GridLayout> */}
+          {this.modal()}
+        </div>
+      </>
     );
   }
 }
